@@ -1,0 +1,116 @@
+// to create menu btn
+
+.menu-btn{
+    position: absolute;
+    z-index: 4;
+    top: 35px;
+    right: 35px;
+    cursor: pointer;
+    @include easeOut;
+    .btn-line{
+        width: 28px;
+        height: 3px;
+        margin: 0 0 5px 0;
+        background:textcolor($primary-color);
+        @include easeOut;
+    }
+    // rotate in x with menu line click
+    &.close{
+        @include easeinout;
+        transform: rotate(180deg);
+        .btn-line{
+            &:nth-child(1){
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            &:nth-child(2){
+                opacity: 0;
+            }
+            &:nth-child(3){
+                transform: rotate(-45deg) translate(7px,-5px);
+            }
+        }
+    }
+}
+// menu overlay
+.menu{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    opacity: 0.9;
+    visibility: hidden;
+    &.show{
+        visibility: visible;
+
+    }
+    &-branding,&-nav{
+        display: flex;
+        flex-flow: column wrap;
+        align-items: center;
+        justify-content: center;
+        float: left;
+        width: 50%;
+        height: 100vh;
+        overflow: hidden;
+    }
+    &-nav{
+        margin: 0;
+        padding: 0;
+        background: darken($primary-color,5);
+        list-style: none;
+        transform: translate3d(0,-100%,0);
+        @include easeinout;
+        &.show{
+            transform: translate3d(0,0,0);
+        }
+    }
+    &-branding{
+        background: darken($primary-color,2);
+        transform: translate3d(0,100%,0);
+        @include easeinout;
+        &.show{
+            transform: translate3d(0,0,0);
+        }
+        .portrait{
+            width: 250px;
+            height: 250px;
+            background:url(../img/image2.jpg);
+            border-radius: 50%;
+            border: solid 3px $secondary-color;
+
+        }
+
+    }
+    .nav-item{
+        transform: translate3d(600px,0,0);
+        @include easeinout;
+        &.show{
+            transform: translate3d(0,0,0);
+        }
+        &.current>a{
+            color: $secondary-color;
+
+        }
+    }
+}
+@for $delay from 1 through 4{
+    .nav-item:nth-child(#{$delay}){
+        transition-delay: $delay*0.1s;
+    }
+    .nav-link{
+        display: inline-block;
+        position: relative;
+        text-transform: uppercase;
+        font-size: 30px;
+        padding: 1rem,0;
+        font-weight: 500;
+        color:textcolor($primary-color);
+        text-decoration: none;
+        @include easeOut;
+        line-height: 3.5;
+        &:hover{
+            color: $secondary-color;
+
+        }
+        
+    }
+}
